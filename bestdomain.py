@@ -46,6 +46,7 @@ def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
         'Content-Type': 'application/json',
     }
     record_name = domain if subdomain == '@' else f'{subdomain}.{domain}'
+    i = 0
     for ip in ip_list:
         data = {
             "type": "A",
@@ -53,7 +54,10 @@ def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
             "content": ip,
             "ttl": 1,
             "proxied": False
-        }
+        }  
+        i = i + 1
+        if  i > 3: 
+            break
         response = requests.post(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records', json=data, headers=headers)
         if response.status_code == 200:
             print(f"Add {subdomain}:{ip}")
