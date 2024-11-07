@@ -28,16 +28,17 @@ def delete_existing_dns_records(api_token, zone_id, subdomain, domain):
     while True:
         response = requests.get(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records?type=A&name={record_name}', headers=headers)
         response.raise_for_status()
-        records = response.json().get('result', [])
+        records = response.json().get('result', [])        
         if not records:
             break
-        for record in records:
-            if ( i < 3 ) {
-                delete_response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record["id"]}', headers=headers)
-                delete_response.raise_for_status()
-                print(f"Del {subdomain}:{record['id']}")
-            }
         i = i + 1
+        if (i > 3 )
+            break
+        for record in records:
+            delete_response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record["id"]}', headers=headers)
+            delete_response.raise_for_status()
+            print(f"Del {subdomain}:{record['id']}")
+        
         
 def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
     headers = {
