@@ -24,6 +24,7 @@ def delete_existing_dns_records(api_token, zone_id, subdomain, domain):
         'Content-Type': 'application/json',
     }
     record_name = domain if subdomain == '@' else f'{subdomain}.{domain}'
+    i = 0;
     while True:
         response = requests.get(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records?type=A&name={record_name}', headers=headers)
         response.raise_for_status()
@@ -31,10 +32,13 @@ def delete_existing_dns_records(api_token, zone_id, subdomain, domain):
         if not records:
             break
         for record in records:
-            delete_response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record["id"]}', headers=headers)
-            delete_response.raise_for_status()
-            print(f"Del {subdomain}:{record['id']}")
-
+            if ( i <3 ){
+                delete_response = requests.delete(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records/{record["id"]}', headers=headers)
+                delete_response.raise_for_status()
+                print(f"Del {subdomain}:{record['id']}")
+            }
+        i = i + 1
+        
 def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
     headers = {
         'Authorization': f'Bearer {api_token}',
