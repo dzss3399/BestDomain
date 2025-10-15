@@ -76,9 +76,9 @@ def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
             "proxied": False
         }  
         
-       if check_proxy_ip((ip) == True:
-        continue
-
+        if check_proxy_ip((ip) == True:
+            continue 
+           
         i = i + 1
         if  i > 8: 
             break
