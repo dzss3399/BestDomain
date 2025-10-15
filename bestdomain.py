@@ -18,6 +18,29 @@ def get_cloudflare_zone(api_token):
         raise Exception("No zones found")
     return zones[0]['id'], zones[0]['name']
 
+def check_proxy_ip(proxy_ip: str):
+    url = f"https://checkproxyip.918181.xyz/check?proxyip={proxy_ip}"
+    
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  # 检查是否返回 200 状态
+        result_text = response.text.strip()
+        
+        # 输出原始返回结果
+        print("返回内容:", result_text)
+        
+        # 判断是否包含 true
+        if "true" in result_text.lower():
+            print("检测结果: ✅ 存在 true")
+            return True
+        else:
+            print("检测结果: ❌ 不存在 true")
+            return False
+            
+    except requests.RequestException as e:
+        print("请求错误:", e)
+        return False
+        
 def delete_existing_dns_records(api_token, zone_id, subdomain, domain):
     headers = {
         'Authorization': f'Bearer {api_token}',
