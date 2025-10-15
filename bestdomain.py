@@ -18,6 +18,7 @@ def get_cloudflare_zone(api_token):
         raise Exception("No zones found")
     return zones[0]['id'], zones[0]['name']
 
+ # 自己家的
 def check_proxy_ip(proxy_ip: str):
     url = f"https://checkproxyip.918181.xyz/check?proxyip={proxy_ip}"
     
