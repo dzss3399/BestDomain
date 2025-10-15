@@ -84,10 +84,10 @@ def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
             break
         if check_proxy_ip(ip):     
             response = requests.post(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records', json=data, headers=headers)
-        if response.status_code == 200:
-            print(f"Add {subdomain}:{ip}")
-        else:
-            print(f"Failed to add A record for IP {ip} to subdomain {subdomain}: {response.status_code} {response.text}")
+            if response.status_code == 200:
+                print(f"Add {subdomain}:{ip}")
+            else:
+                print(f"Failed to add A record for IP {ip} to subdomain {subdomain}: {response.status_code} {response.text}")
 
 if __name__ == "__main__":
     api_token = os.getenv('CF_API_TOKEN')
