@@ -79,13 +79,14 @@ def update_cloudflare_dns(ip_list, api_token, zone_id, subdomain, domain):
         
             
            
-        i = i + 1
-        if  i > 8: 
+#        i = i + 1
+#        if  i > 8: 
             break
         if check_proxy_ip(ip):     
             response = requests.post(f'https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records', json=data, headers=headers)
             if response.status_code == 200:
                 print(f"Add {subdomain}:{ip}")
+                break
             else:
                 print(f"Failed to add A record for IP {ip} to subdomain {subdomain}: {response.status_code} {response.text}")
 
