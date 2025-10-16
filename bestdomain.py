@@ -23,7 +23,7 @@ def check_proxy_ip(proxy_ip: str):
 #    url = f"https://checkproxyip.918181.xyz/check?proxyip={proxy_ip}"
      url = f"https://checker-3j2.pages.dev/api/check?proxyip={proxy_ip}" 
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=20)
         response.raise_for_status()  # 检查是否返回 200 状态
         result_text = response.text.strip()
         
