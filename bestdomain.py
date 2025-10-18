@@ -20,8 +20,8 @@ def get_cloudflare_zone(api_token):
 
  # 自己家的
 def check_proxy_ip(proxy_ip: str):
-#    url = f"https://checkproxyip.918181.xyz/check?proxyip={proxy_ip}"
-    url = f"https://checker-3j2.pages.dev/api/check?proxyip={proxy_ip}" 
+    url = f" https://mycheckproxyip.918181.xyz/api/check?proxyip={proxy_ip}"
+#    url = f"https://checker-3j2.pages.dev/api/check?proxyip={proxy_ip}" 
     print("url:", url)
     try:
         response = requests.get(url, timeout=30)
