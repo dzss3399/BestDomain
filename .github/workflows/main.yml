@@ -4,8 +4,8 @@ on:
   schedule:
     - cron: '*/60 * * * *'  # 每隔三十分钟运行一次
   workflow_dispatch:  # 手动触发
-  schedule:
-    - cron: "0 0 */3 * *"  # 每三天运行一次，可以根据需求调整时间
+#  schedule:
+#    - cron: "0 0 */3 * *"  # 每三天运行一次，可以根据需求调整时间
     
 jobs:
   update-dns:
